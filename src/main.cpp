@@ -1,19 +1,17 @@
-#include <Arduino.h>
+#include <Arduino.h> // test
 
-bool led = true;
+bool led_on = true;               // remembers LED state, starts as on
 
 void setup() {
-  pinMode(23, OUTPUT);
-  pinMode(22, INPUT_PULLDOWN);
-  digitalWrite(23, led);
+  pinMode(23, OUTPUT);           // pin 23 = LED
+  pinMode(22, INPUT_PULLDOWN);   // pin 22 = button, LOW when released
+  digitalWrite(23, HIGH);        // LED on at startup
 }
 
 void loop() {
-  if (digitalRead(22) == HIGH) {
-    delay(50);                          // debounce the press
-    led = !led;
-    digitalWrite(23, led);
-    while (digitalRead(22) == HIGH) {}  // wait until the button is released
-    delay(50);                          // debounce the release
+  if (digitalRead(22) == HIGH) { // button pressed
+    led_on = !led_on;              // flip the state
+    digitalWrite(23, led_on);     // update the LED
+    delay(300);                  // debounce
   }
 }
