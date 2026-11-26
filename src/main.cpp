@@ -12,6 +12,6 @@ void loop() {
   if (digitalRead(22) == HIGH) { // button pressed
     led_on = !led_on;              // flip the state
     digitalWrite(23, led_on);     // update the LED
-    delay(300);                  // debounce
+    delay(200);                  // debounce
   }
 }
